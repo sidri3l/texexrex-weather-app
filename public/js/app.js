@@ -19,8 +19,12 @@ const getWeatherData = address => {
             if (data.error) {
                 renderContent('first', data.error);
             } else {
+                const { forecast } = data;
+                const { decritption, temperature, feelslike } = forecast;
                 renderContent('first', data.location);
-                renderContent('second', JSON.stringify(data.forecastData));
+                renderContent('second', `Description: ${decritption}`);
+                renderContent('third', `Temperature: ${temperature}`);
+                renderContent('fourth', `FeelsLike: ${feelslike}`);
             }
         });
     });
@@ -32,6 +36,8 @@ weatherFrom.addEventListener('submit', e => {
     
     renderContent('first', 'Loading...');
     renderContent('second', '');
+    renderContent('third', '');
+    renderContent('fourth', '');
 
     const location = search.value;
 
